@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #code {
+                display: block;
+                width: 100%;
+                margin: 20px auto;
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body style="margin: 0 20px;">
+        <textarea id = "code">
+
+
+        </textarea>
+        <button style="width: 100px;height: 40px;" onclick="transformCode()">转换</button>
+        <div id ="result" style="white-space: pre;margin-bottom: 40px;"></div>
+
+        <script src = "./dist/web/bundle.js"></script>
+        <script>
+            var codeEl = document.getElementById("code")
+            codeEl.value = `{
+    render:function() {
+        var t = this
+        , e = t.$createElement
+        , i = t._self._c || e;
+        return i("transition", {
+            attrs: {
+                name: "el-zoom-in-top"
+            },
+            on: {
+                "after-leave": function(e) {
+                    t.$emit("dodestroy")
+                }
+            }
+        }, [i("div", {
+            directives: [{
+                name: "show",
+                rawName: "v-show",
+                value: t.visible,
+                expression: "visible"
+            }],
+            staticClass: "el-time-panel el-popper",
+            class: t.popperClass
+        }, [i("div", {
+            staticClass: "el-time-panel__content",
+            class: {
+                "has-seconds": t.showSeconds
+            }
+        }, [i("time-spinner", {
+            ref: "spinner",
+            attrs: {
+                "arrow-control": t.useArrow,
+                "show-seconds": t.showSeconds,
+                "am-pm-mode": t.amPmMode,
+                date: t.date
+            },
+            on: {
+                change: t.handleChange,
+                "select-range": t.setSelectionRange
+            }
+        })], 1), i("div", {
+            staticClass: "el-time-panel__footer"
+        }, [i("button", {
+            staticClass: "el-time-panel__btn cancel",
+            attrs: {
+                type: "button"
+            },
+            on: {
+                click: t.handleCancel
+            }
+        }, [t._v(t._s(t.t("el.datepicker.cancel")))]), i("button", {
+            staticClass: "el-time-panel__btn",
+            class: {
+                confirm: !t.disabled
+            },
+            attrs: {
+                type: "button"
+            },
+            on: {
+                click: function(e) {
+                    t.handleConfirm()
+                }
+            }
+        }, [t._v(t._s(t.t("el.datepicker.confirm")))])])])])
+    }
+}`
+
+
+
+            function transformCode () {
+                
+                console.log(codeEl.value)
+                var _code = codeEl.value.trim()
+                console.log(_code)
+                var tpl = window.transform(_code)
+                var resultEl = document.getElementById("result")
+                resultEl.textContent = tpl;
+
+            }
+
+        </script>
+    </body>
+    
+</html>
